@@ -55,10 +55,18 @@ def insert_into_bigquery(data):
     for entry in data:
         if entry: 
             rows_to_insert.append({
-                "city": entry["name"],
-                "temperature": entry["main"]["temp"],
-                "weather": entry["weather"][0]["description"],
-                "timestamp": entry["dt"],
+                "city": data["name"],
+                "temperature": data["main"]["temp"],
+                "weather": data["weather"][0]["description"],
+                "timestamp": data["dt"],
+                "humidity": data["main"]["humidity"],
+                "wind_speed": data["wind"]["speed"],
+                "pressure": data["main"]["pressure"],     
+                "cloudiness": data["clouds"]["all"],          
+                "sunrise": datetime.fromtimestamp(data["sys"]["sunrise"]), 
+                "sunset": datetime.fromtimestamp(data["sys"]["sunset"]),    
+                "feels_like": data["main"]["feels_like"],      
+                "visibility": data["visibility"],             
             })
 
     if rows_to_insert:
